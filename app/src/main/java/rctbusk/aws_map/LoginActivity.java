@@ -47,12 +47,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    // setup AWS service configuration. Choosing default configuration
-    ClientConfiguration clientConfiguration = new ClientConfiguration();
-
-    // Create a CognitoUserPool object to refer to your user pool
-    CognitoUserPool userPool = new CognitoUserPool(context, poolId, clientId, clientSecret, clientConfiguration);
-
+    /**
+     * A dummy authentication store containing known user names and passwords.
+     * TODO: remove after connecting to a real authentication system.
+     */
+    private static final String[] DUMMY_CREDENTIALS = new String[]{
+            "foo@example.com:hello", "bar@example.com:world"
+    };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
