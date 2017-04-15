@@ -11,11 +11,17 @@ import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleMap.OnMyLocationButtonClickListener,
+        GoogleMap.OnMapLongClickListener,
+        GoogleMap.OnInfoWindowLongClickListener,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
     /**
@@ -33,17 +39,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private GoogleMap mMap;
 
+    // TODO: sync markers with cloud
+    private ArrayList<Marker> markerArrayList = new ArrayList<Marker>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
     }
-
 
     /**
      * Manipulates the map once available.
@@ -60,10 +69,35 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mMap.setOnMyLocationButtonClickListener(this);
         enableMyLocation();
-//        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        // enable user to add markers
+        mMap.setOnMapLongClickListener(this);
+
+        // enable user to delete markers
+        mMap.setOnInfoWindowLongClickListener(this);
+    }
+
+    /**
+     * deletes selected marker from the map
+     */
+    @Override
+    public void onInfoWindowLongClick(Marker marker) {
+        markerArrayList.remove(marker);
+        marker.remove();
+    }
+
+    /**
+     * adds marker to the map
+     */
+    @Override
+    public void onMapLongClick(LatLng point) {
+        Marker marker = mMap.addMarker(new MarkerOptions()
+                .position(point)
+                .title("Marker Type")
+                .snippet("User ID")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+
+        markerArrayList.add(marker);
     }
 
     /**
