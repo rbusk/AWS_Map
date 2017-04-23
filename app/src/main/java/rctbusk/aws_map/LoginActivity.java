@@ -3,23 +3,23 @@ package rctbusk.aws_map;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
+import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.content.Intent;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,10 +30,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.amazonaws.ClientConfiguration;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserPool;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import android.util.Log;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -51,9 +52,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
      */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
+    // setup AWS service configuration. Choosing default configuration
+    ClientConfiguration clientConfiguration;
+
+    // Create a CognitoUserPool object to refer to your user pool
+    CognitoUserPool userPool;
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -64,6 +67,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    public LoginActivity() {
+        clientConfiguration = new ClientConfiguration();
+        userPool = new CognitoUserPool(getApplicationContext(), "us-east-2_CQ1doCR2o", "s9bb0otdfj0rsv8geb231qfm0", "hidk8ujat9dral9sho6h54eqfnnls27hu8iipb3o401jauq94a", clientConfiguration);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -375,14 +383,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
             // TODO: register the new account here.
             return false;
         }
@@ -428,14 +428,6 @@ public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             return false;
-        }
-
-        for (String credential : DUMMY_CREDENTIALS) {
-            String[] pieces = credential.split(":");
-            if (pieces[0].equals(mEmail)) {
-                // Account exists, return true if the password matches.
-                return pieces[1].equals(mPassword);
-            }
         }
 
         // TODO: register the new account here.
