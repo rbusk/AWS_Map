@@ -1,25 +1,48 @@
 <resources>
-    <string name="app_name">AWS_Map</string>
-    <string name="title_activity_maps">Map</string>
-    <string name="title_activity_login">Sign in</string>
+	<string name="app_name">AWS_Map</string>
+	<string name="title_activity_maps">Map</string>
+	<string name="title_activity_login">Sign in</string>
 
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in</string>
-    <string name="action_register">Register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
 
     <!--    Permissions    -->
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
     <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
     <string name="permission_required_toast">Location permission is required for this demo.</string>
+
+	<!-- Strings related to login -->
+	<string name="prompt_email">Email</string>
+	<string name="prompt_password">Password (optional)</string>
+	<string name="action_sign_in">Sign in</string>
+	<string name="action_register">Register</string>
+	<string name="action_sign_in_short">Sign in</string>
+	<string name="error_invalid_email">This email address is invalid</string>
+	<string name="error_invalid_password">This password is too short</string>
+	<string name="error_incorrect_password">This password is incorrect</string>
+	<string name="error_field_required">This field is required</string>
+	<string name="permission_rationale">"Contacts permissions are needed for providing email
+		completions."
+	</string>
+	<string name="app_main_screen">Sign in</string>
+	<string name="app_main_screen_title">Ford App</string>
+	<string name="app_main_desc">App for tracking markers on a map.</string>
+	<string name="nav_drawer_open">Open navigation drawer</string>
+	<string name="nav_drawer_close">Close navigation drawer</string>
+	<string name="title_activity_user">UserActivity</string>
+	<string name="Username">Username</string>
+	<string name="Password">Password</string>
+	<string name="Menu">Menu</string>
+	<string name="title_activity_about_app">AboutApp</string>
+	<string name="about">Copyright 2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.\n\nLicensed under the Amazon Software License (the "License").\nYou may not use this file except in compliance with the License.\nA copy of the License is located at\n\nhttp://aws.amazon.com/asl/
+		\n\nor in the "license" file accompanying this app. This app is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</string>
+	<string name="more_info">This is a sample app to showcase Cognito Identity and the SDK for Android.</string>
+	<string name="title_activity_sign_up_confirm">SignUpConfirm</string>
+	<string name="title_activity_mfa">MFAActivity</string>
+	<string name="title_activity_forgot_password">ForgotPasswordActivity</string>
+	<string name="title_activity_settings">SettingsActivity</string>
+	<string name="title_activity_change_password">ChangePasswordActivity</string>
+	<string name="title_activity_verify">VerifyActivity</string>
+	<string name="title_activity_add_attribute">AddAttributeActivity</string>
+	<string name="title_activity_device_settings">DeviceSettings</string>
+	<string name="title_activity_new_password">NewPassword</string>
 
 </resources>
